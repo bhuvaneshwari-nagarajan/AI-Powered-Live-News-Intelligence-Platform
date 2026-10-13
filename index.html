@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NewsSphere — AI-Powered Live News Intelligence Platform. Worldwide news coverage in English and Tamil. Demo content only." />
+  <title>NewsSphere — AI-Powered Live News Intelligence</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+
+  <!-- Favicon placeholder -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+</head>
+<body class="lang-en" data-theme="light">
+
+  <!-- ░░ SKIP LINK ░░ -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ░░ DEMO BANNER ░░ -->
+  <div class="demo-banner" role="note" aria-label="Demo content notice">
+    <span class="demo-icon">⚠</span>
+    <span class="lang-text en">This is a demo platform. All news, broadcasts, weather, and horoscope content is sample data only.</span>
+    <span class="lang-text ta">இது ஒரு டெமோ தளம். அனைத்து செய்திகளும் மாதிரி தரவு மட்டுமே.</span>
+    <button class="demo-close" aria-label="Dismiss notice" onclick="this.parentElement.style.display='none'">×</button>
+  </div>
+
+  <!-- ░░ HEADER ░░ -->
+  <header class="site-header" role="banner">
+    <div class="header-inner container">
+
+      <!-- Brand -->
+      <a href="#" class="brand" aria-label="NewsSphere — Home">
+        <span class="brand-logo" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2"/>
+            <ellipse cx="18" cy="18" rx="8" ry="17" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="1" y1="18" x2="35" y2="18" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="3" y1="10" x2="33" y2="10" stroke="currentColor" stroke-width="1"/>
+            <line x1="3" y1="26" x2="33" y2="26" stroke="currentColor" stroke-width="1"/>
+          </svg>
+        </span>
+        <span class="brand-name">NewsSphere</span>
+        <span class="brand-tagline lang-text en">AI News Intelligence</span>
+        <span class="brand-tagline lang-text ta">AI செய்தி நுண்ணறிவு</span>
+      </a>
+
+      <!-- Header right controls -->
+      <div class="header-controls">
+
+        <!-- Search toggle -->
+        <button class="icon-btn search-toggle" aria-label="Toggle search" aria-expanded="false" id="searchToggle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+
+        <!-- Language toggle -->
+        <button class="lang-toggle" id="langToggle" aria-label="Switch language" aria-pressed="false">
+          <span class="lang-option en-opt active">EN</span>
+          <span class="lang-divider">|</span>
+          <span class="lang-option ta-opt">தமிழ்</span>
+        </button>
+
+        <!-- Mobile nav toggle -->
+        <button class="icon-btn nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primaryNav" id="navToggle">
+          <span class="hamburger" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search bar (collapsible) -->
+    <div class="search-bar-wrapper" id="searchBarWrapper" aria-hidden="true">
+      <div class="container">
+        <form class="search-form" role="search" id="searchForm">
+          <label for="searchInput" class="sr-only">
+            <span class="lang-text en">Search news</span>
+            <span class="lang-text ta">செய்தி தேடல்</span>
+          </label>
+          <input
+            type="search"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search news…"
+            autocomplete="off"
+            aria-label="Search news"
+          />
+          <button type="submit" class="search-btn">
+            <span class="lang-text en">Search</span>
+            <span class="lang-text ta">தேடு</span>
+          </button>
+          <button type="button" class="search-close icon-btn" aria-label="Close search" id="searchClose">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </form>
+        <div id="searchResults" class="search-results" aria-live="polite" aria-label="Search results"></div>
+      </div>
+    </div>
+
+    <!-- Primary Navigation -->
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary navigation">
+      <div class="container">
+        <ul class="nav-list" role="list">
+          <li><a href="#" class="nav-link active" aria-current="page">
+            <span class="lang-text en">Home</span>
+            <span class="lang-text ta">முகப்பு</span>
+          </a></li>
+          <li><a href="#world-news" class="nav-link">
+            <span class="lang-text en">World</span>
+            <span class="lang-text ta">உலகம்</span>
+          </a></li>
+          <li><a href="#politics-news" class="nav-link">
+            <span class="lang-text en">Politics</span>
+            <span class="lang-text ta">அரசியல்</span>
+          </a></li>
+          <li><a href="#business-news" class="nav-link">
+            <span class="lang-text en">Business</span>
+            <span class="lang-text ta">வணிகம்</span>
+          </a></li>
+          <li><a href="#tech-news" class="nav-link">
+            <span class="lang-text en">Technology</span>
+            <span class="lang-text ta">தொழில்நுட்பம்</span>
+          </a></li>
+          <li><a href="#science-news" class="nav-link">
+            <span class="lang-text en">Science</span>
+            <span class="lang-text ta">அறிவியல்</span>
+          </a></li>
+          <li><a href="#sports-section" class="nav-link">
+            <span class="lang-text en">Sports</span>
+            <span class="lang-text ta">விளையாட்டு</span>
+          </a></li>
+          <li><a href="#live-tv" class="nav-link nav-highlight">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span class="lang-text en">TV Preview</span>
+            <span class="lang-text ta">தொலைக்காட்சி முன்னோட்டம்</span>
+          </a></li>
+          <li><a href="#weather-section" class="nav-link">
+            <span class="lang-text en">Weather</span>
+            <span class="lang-text ta">வானிலை</span>
+          </a></li>
+          <li><a href="#horoscope-section" class="nav-link">
+            <span class="lang-text en">Horoscope</span>
+            <span class="lang-text ta">ராசிபலன்</span>
+          </a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ░░ MAIN CONTENT ░░ -->
+  <main id="main-content">
+
+    <!-- ── BREAKING NEWS STRIP ── -->
+    <section class="breaking-strip" aria-label="Breaking news ticker">
+      <div class="container breaking-inner">
+        <span class="breaking-label">
+          <span class="lang-text en">BREAKING</span>
+          <span class="lang-text ta">முக்கிய செய்தி</span>
+        </span>
+        <div class="ticker-track" aria-live="polite" aria-atomic="false">
+          <div class="ticker-content" id="tickerContent">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+        <div class="ticker-controls">
+          <button class="ticker-btn" id="tickerPause" aria-label="Pause ticker">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HERO / FEATURED ── -->
+    <section class="hero-section" id="hero" aria-label="Featured news">
+      <div class="container">
+        <div class="hero-grid">
+
+          <!-- Main featured story -->
+          <article class="hero-main" tabindex="0" role="article" data-article-id="1">
+            <div class="hero-image-wrap">
+              <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&amp;fit=crop&amp;w=1800&amp;q=85" alt="[Demo image] Solar panels at a renewable energy site, illustrating climate summit coverage" class="hero-image" loading="eager" onerror="this.onerror=null;this.src='assets/images/hero-placeholder.svg'" />
+              <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+              <span class="category-badge cat-world">
+                <span class="lang-text en">World</span>
+                <span class="lang-text ta">உலகம்</span>
+              </span>
+              <h1 class="hero-headline">
+                <span class="lang-text en">Global Leaders Convene for Historic Climate and Economic Summit</span>
+                <span class="lang-text ta">வரலாற்றுச் சிறப்புமிக்க காலநிலை மற்றும் பொருளாதார மாநாட்டில் உலகத் தலைவர்கள் கூடினர்</span>
+              </h1>
+              <p class="hero-summary">
+                <span class="lang-text en">Representatives from over 140 nations gathered today to discuss binding commitments on carbon reduction and equitable economic development. [DEMO CONTENT]</span>
+                <span class="lang-text ta">140-க்கும் மேற்பட்ட நாடுகளின் பிரதிநிதிகள் கார்பன் குறைப்பு மற்றும் சமபங்கு வளர்ச்சி குறித்து இன்று ஒன்று கூடினர். [மாதிரி உள்ளடக்கம்]</span>
+              </p>
+              <div class="hero-meta">
+                <time datetime="2026-10-12" class="hero-time">12 Oct 2026</time>
+                <span class="hero-author">
+                  <span class="lang-text en">Demo Editorial Team</span>
+                  <span class="lang-text ta">மாதிரி தலையங்க குழு</span>
+                </span>
+              </div>
+              <button class="read-more-btn" data-article-id="1">
+                <span class="lang-text en">Read Full Story</span>
+                <span class="lang-text ta">முழுக் கட்டுரை படிக்கவும்</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Secondary stories -->
+          <aside class="hero-sidebar" aria-label="More top stories">
+            <h2 class="sr-only">
+              <span class="lang-text en">Top Stories</span>
+              <span class="lang-text ta">முக்கிய கதைகள்</span>
+            </h2>
+
+            <article class="hero-card" tabindex="0" data-article-id="2">
+              <div class="hero-card-img">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="[Demo image] Close-up of electronic circuit components" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder-tech.svg'" />
+              </div>
+              <div class="hero-card-body">
+                <span class="category-badge cat-tech">Tech</span>
+                <h3 class="hero-card-headline">
+                  <span class="lang-text en">Nations Draft First Binding AI Governance Framework [DEMO]</span>
+                  <span class="lang-text ta">முதல் கட்டாய AI ஆட்சி கட்டமைப்பு வரைவு — நாடுகள் [மாதிரி]</span>
+                </h3>
+                <time datetime="2026-10-12">12 Oct 2026</time>
+              </div>
+            </article>
+
+            <article class="hero-card" tabindex="0" data-article-id="3">
+              <div class="hero-card-img">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="[Demo image] Financial market charts on a trading display" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder-business.svg'" />
+              </div>
+              <div class="hero-card-body">
+                <span class="category-badge cat-business">Business</span>
+                <h3 class="hero-card-headline">
+                  <span class="lang-text en">Global Markets Rebound After Three-Day Decline [DEMO]</span>
+                  <span class="lang-text ta">மூன்று நாள் வீழ்ச்சிக்குப் பிறகு உலக சந்தைகள் மீண்டன [மாதிரி]</span>
+                </h3>
+                <time datetime="2026-10-12">12 Oct 2026</time>
+              </div>
+            </article>
+
+            <article class="hero-card" tabindex="0" data-article-id="4">
+              <div class="hero-card-img">
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="[Demo image] Researcher working in a science laboratory" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder-science.svg'" />
+              </div>
+              <div class="hero-card-body">
+                <span class="category-badge cat-science">Science</span>
+                <h3 class="hero-card-headline">
+                  <span class="lang-text en">Researchers Report Breakthrough in Quantum Memory Storage [DEMO]</span>
+                  <span class="lang-text ta">குவாண்டம் நினைவக சேமிப்பில் திடீர் முன்னேற்றம் — ஆராய்ச்சியாளர்கள் [மாதிரி]</span>
+                </h3>
+                <time datetime="2026-10-11">11 Oct 2026</time>
+              </div>
+            </article>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── AI INTELLIGENCE STRIP ── -->
+    <section class="ai-strip" aria-label="AI news summary">
+      <div class="container ai-strip-inner">
+        <span class="ai-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 0 6h-1v1a4 4 0 0 1-8 0v-1H7a3 3 0 0 1 0-6h1V6a4 4 0 0 1 4-4z"/>
+            <circle cx="9" cy="9" r="1" fill="currentColor"/>
+            <circle cx="15" cy="9" r="1" fill="currentColor"/>
+          </svg>
+        </span>
+        <div class="ai-strip-text">
+          <strong class="ai-strip-label">
+            <span class="lang-text en">AI Briefing</span>
+            <span class="lang-text ta">AI சுருக்கம்</span>
+          </strong>
+          <span class="ai-strip-summary">
+            <span class="lang-text en">Today's top story: Climate and AI governance lead global agenda, while markets stabilize after short-term volatility. [DEMO AI SUMMARY]</span>
+            <span class="lang-text ta">இன்றைய முக்கிய செய்தி: காலநிலை மற்றும் AI ஆட்சி உலக நிகழ்ச்சி நிரலில் முன்னிலையில் உள்ளன. சந்தைகள் நிலைபெற்றன. [மாதிரி AI சுருக்கம்]</span>
+          </span>
+        </div>
+        <a href="#ai-section" class="ai-strip-link">
+          <span class="lang-text en">Full AI Digest →</span>
+          <span class="lang-text ta">முழு AI சுருக்கம் →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── LATEST NEWS ── -->
+    <section class="news-section" id="latest-news" aria-labelledby="latestHeading">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title" id="latestHeading">
+            <span class="lang-text en">Latest News</span>
+            <span class="lang-text ta">சமீபத்திய செய்திகள்</span>
+          </h2>
+          <div class="category-filters" role="group" aria-label="Filter news by category">
+            <button class="filter-btn active" data-filter="all">
+              <span class="lang-text en">All</span>
+              <span class="lang-text ta">அனைத்தும்</span>
+            </button>
+            <button class="filter-btn" data-filter="world">
+              <span class="lang-text en">World</span>
+              <span class="lang-text ta">உலகம்</span>
+            </button>
+            <button class="filter-btn" data-filter="politics">
+              <span class="lang-text en">Politics</span>
+              <span class="lang-text ta">அரசியல்</span>
+            </button>
+            <button class="filter-btn" data-filter="tech">
+              <span class="lang-text en">Tech</span>
+              <span class="lang-text ta">தொழில்நுட்பம்</span>
+            </button>
+            <button class="filter-btn" data-filter="business">
+              <span class="lang-text en">Business</span>
+              <span class="lang-text ta">வணிகம்</span>
+            </button>
+            <button class="filter-btn" data-filter="science">
+              <span class="lang-text en">Science</span>
+              <span class="lang-text ta">அறிவியல்</span>
+            </button>
+            <button class="filter-btn" data-filter="sports">
+              <span class="lang-text en">Sports</span>
+              <span class="lang-text ta">விளையாட்டு</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="news-grid" id="latestNewsGrid" aria-live="polite" aria-label="News articles">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="empty-state" id="latestEmpty" hidden>
+          <p class="lang-text en">No results found for this category.</p>
+          <p class="lang-text ta">இந்த வகைக்கு முடிவுகள் எதுவும் இல்லை.</p>
+        </div>
+
+        <button class="load-more-btn" id="loadMoreBtn">
+          <span class="lang-text en">Load More</span>
+          <span class="lang-text ta">மேலும் காட்டு</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ── WORLD NEWS ── -->
+    <section class="news-section alt-bg" id="world-news" aria-labelledby="worldHeading">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title" id="worldHeading">
+            <span class="lang-text en">World News</span>
+            <span class="lang-text ta">உலக செய்திகள்</span>
+          </h2>
+          <a href="#" class="view-all-link">
+            <span class="lang-text en">View All →</span>
+            <span class="lang-text ta">அனைத்தும் காண →</span>
+          </a>
+        </header>
+        <div class="news-feature-layout" id="worldNewsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── POLITICS ── -->
+    <section class="news-section" id="politics-news" aria-labelledby="politicsHeading">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title" id="politicsHeading">
+            <span class="lang-text en">Politics</span>
+            <span class="lang-text ta">அரசியல்</span>
+          </h2>
+          <a href="#latest-news" class="view-all-link">
+            <span class="lang-text en">More headlines →</span>
+            <span class="lang-text ta">மேலும் செய்திகள் →</span>
+          </a>
+        </header>
+        <div class="news-grid politics-grid" id="politicsNewsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TECHNOLOGY NEWS ── -->
+    <section class="news-section" id="tech-news" aria-labelledby="techHeading">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title" id="techHeading">
+            <span class="lang-text en">Technology</span>
+            <span class="lang-text ta">தொழில்நுட்பம்</span>
+          </h2>
+          <a href="#" class="view-all-link">
+            <span class="lang-text en">View All →</span>
+            <span class="lang-text ta">அனைத்தும் காண →</span>
+          </a>
+        </header>
+        <div class="horizontal-scroll-track" id="techNewsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BUSINESS + SCIENCE ── -->
+    <section class="news-section alt-bg split-section" aria-label="Business and Science news">
+      <div class="container">
+        <div class="split-layout">
+
+          <!-- Business -->
+          <div class="split-col" id="business-news">
+            <header class="section-header">
+              <h2 class="section-title" id="businessHeading">
+                <span class="lang-text en">Business</span>
+                <span class="lang-text ta">வணிகம்</span>
+              </h2>
+              <a href="#" class="view-all-link">
+                <span class="lang-text en">View All →</span>
+                <span class="lang-text ta">அனைத்தும் காண →</span>
+              </a>
+            </header>
+            <div class="list-news" id="businessNewsList">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Science -->
+          <div class="split-col" id="science-news">
+            <header class="section-header">
+              <h2 class="section-title" id="scienceHeading">
+                <span class="lang-text en">Science</span>
+                <span class="lang-text ta">அறிவியல்</span>
+              </h2>
+              <a href="#" class="view-all-link">
+                <span class="lang-text en">View All →</span>
+                <span class="lang-text ta">அனைத்தும் காண →</span>
+              </a>
+            </header>
+            <div class="list-news" id="scienceNewsList">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── AI NEWS INTELLIGENCE ── -->
+    <section class="ai-section" id="ai-section" aria-labelledby="aiHeading">
+      <div class="container">
+        <header class="section-header centered">
+          <h2 class="section-title" id="aiHeading">
+            <span class="ai-sparkle" aria-hidden="true">✦</span>
+            <span class="lang-text en">AI News Intelligence</span>
+            <span class="lang-text ta">AI செய்தி நுண்ணறிவு</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="lang-text en">AI-generated editorial summaries. For demonstration only — not verified reporting.</span>
+            <span class="lang-text ta">AI உருவாக்கிய தலையங்க சுருக்கங்கள். ஆர்ப்பாட்டத்திற்கு மட்டுமே — சரிபார்க்கப்பட்ட தகவல் அல்ல.</span>
+          </p>
+        </header>
+
+        <div class="ai-dashboard">
+
+          <!-- Main summary -->
+          <div class="ai-card ai-main-summary">
+            <div class="ai-card-header">
+              <span class="ai-pulse" aria-hidden="true"></span>
+              <h3>
+                <span class="lang-text en">Today's Intelligence Briefing</span>
+                <span class="lang-text ta">இன்றைய நுண்ணறிவு சுருக்கம்</span>
+              </h3>
+              <span class="ai-badge">
+                <span class="lang-text en">AI Generated · DEMO</span>
+                <span class="lang-text ta">AI உருவாக்கிய · மாதிரி</span>
+              </span>
+            </div>
+            <div class="ai-summary-body">
+              <p class="lang-text en">
+                The dominant narrative today centers on the intersection of climate policy and emerging technologies. Three separate summits are ongoing, signaling a shift in how global governance approaches systemic risk. Economic data from major indices suggests cautious optimism following recent volatility. Regional tensions in several areas remain a watch point for tomorrow's sessions.
+              </p>
+              <p class="lang-text ta">
+                இன்றைய ஆதிக்க கதை காலநிலை கொள்கை மற்றும் வளர்ந்து வரும் தொழில்நுட்பங்களின் குறுக்கீட்டை மையமாகக் கொண்டுள்ளது. மூன்று தனி மாநாடுகள் நடந்து கொண்டிருக்கின்றன. பொருளாதார தரவு எச்சரிக்கையான நம்பகத்தன்மையை காட்டுகிறது.
+              </p>
+              <div class="ai-topics">
+                <span class="ai-topic-tag">
+                  <span class="lang-text en">Climate Policy</span>
+                  <span class="lang-text ta">காலநிலை கொள்கை</span>
+                </span>
+                <span class="ai-topic-tag">
+                  <span class="lang-text en">AI Governance</span>
+                  <span class="lang-text ta">AI ஆட்சி</span>
+                </span>
+                <span class="ai-topic-tag">
+                  <span class="lang-text en">Markets</span>
+                  <span class="lang-text ta">சந்தைகள்</span>
+                </span>
+                <span class="ai-topic-tag">
+                  <span class="lang-text en">Geopolitics</span>
+                  <span class="lang-text ta">புவி அரசியல்</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sentiment and trend cards -->
+          <div class="ai-meta-cards">
+            <div class="ai-meta-card">
+              <div class="ai-meta-icon" aria-hidden="true">📊</div>
+              <h4>
+                <span class="lang-text en">Sentiment Analysis</span>
+                <span class="lang-text ta">உணர்வு பகுப்பாய்வு</span>
+              </h4>
+              <div class="sentiment-bars" role="list">
+                <div class="sentiment-bar" role="listitem">
+                  <span class="sentiment-label">
+                    <span class="lang-text en">Positive</span>
+                    <span class="lang-text ta">நேர்மறை</span>
+                  </span>
+                  <div class="bar-wrap"><div class="bar-fill pos" style="width:42%" aria-label="42% positive"></div></div>
+                  <span class="bar-val">42%</span>
+                </div>
+                <div class="sentiment-bar" role="listitem">
+                  <span class="sentiment-label">
+                    <span class="lang-text en">Neutral</span>
+                    <span class="lang-text ta">நடுநிலை</span>
+                  </span>
+                  <div class="bar-wrap"><div class="bar-fill neu" style="width:35%" aria-label="35% neutral"></div></div>
+                  <span class="bar-val">35%</span>
+                </div>
+                <div class="sentiment-bar" role="listitem">
+                  <span class="sentiment-label">
+                    <span class="lang-text en">Negative</span>
+                    <span class="lang-text ta">எதிர்மறை</span>
+                  </span>
+                  <div class="bar-wrap"><div class="bar-fill neg" style="width:23%" aria-label="23% negative"></div></div>
+                  <span class="bar-val">23%</span>
+                </div>
+              </div>
+              <p class="ai-demo-note lang-text en">DEMO DATA</p>
+              <p class="ai-demo-note lang-text ta">மாதிரி தரவு</p>
+            </div>
+
+            <div class="ai-meta-card">
+              <div class="ai-meta-icon" aria-hidden="true">🔥</div>
+              <h4>
+                <span class="lang-text en">Trending Topics</span>
+                <span class="lang-text ta">பிரபல தலைப்புகள்</span>
+              </h4>
+              <ol class="trending-list" aria-label="Trending topics demo list">
+                <li><span class="trend-rank">1</span><span class="lang-text en">#ClimateAction2026</span><span class="lang-text ta">#காலநிலைநடவடிக்கை2026</span></li>
+                <li><span class="trend-rank">2</span><span class="lang-text en">#AIGovernance</span><span class="lang-text ta">#AIஆட்சி</span></li>
+                <li><span class="trend-rank">3</span><span class="lang-text en">#QuantumBreakthrough</span><span class="lang-text ta">#குவாண்டம்முன்னேற்றம்</span></li>
+                <li><span class="trend-rank">4</span><span class="lang-text en">#GlobalMarkets</span><span class="lang-text ta">#உலகசந்தைகள்</span></li>
+                <li><span class="trend-rank">5</span><span class="lang-text en">#SpaceMissions</span><span class="lang-text ta">#விண்வெளிபயணம்</span></li>
+              </ol>
+              <p class="ai-demo-note lang-text en">DEMO DATA</p>
+              <p class="ai-demo-note lang-text ta">மாதிரி தரவு</p>
+            </div>
+
+            <div class="ai-meta-card">
+              <div class="ai-meta-icon" aria-hidden="true">🌐</div>
+              <h4>
+                <span class="lang-text en">Coverage by Region</span>
+                <span class="lang-text ta">பிராந்தியம் வாரியாக செய்திகள்</span>
+              </h4>
+              <ul class="region-list" aria-label="Coverage by region demo">
+                <li><span class="region-name">
+                  <span class="lang-text en">Europe</span>
+                  <span class="lang-text ta">ஐரோப்பா</span>
+                </span><div class="region-bar-wrap"><div class="region-bar" style="width:38%"></div></div><span>38%</span></li>
+                <li><span class="region-name">
+                  <span class="lang-text en">Asia-Pacific</span>
+                  <span class="lang-text ta">ஆசியா-பசிபிக்</span>
+                </span><div class="region-bar-wrap"><div class="region-bar" style="width:29%"></div></div><span>29%</span></li>
+                <li><span class="region-name">
+                  <span class="lang-text en">Americas</span>
+                  <span class="lang-text ta">அமெரிக்காக்கள்</span>
+                </span><div class="region-bar-wrap"><div class="region-bar" style="width:22%"></div></div><span>22%</span></li>
+                <li><span class="region-name">
+                  <span class="lang-text en">Africa & ME</span>
+                  <span class="lang-text ta">ஆப்பிரிக்கா & ME</span>
+                </span><div class="region-bar-wrap"><div class="region-bar" style="width:11%"></div></div><span>11%</span></li>
+              </ul>
+              <p class="ai-demo-note lang-text en">DEMO DATA</p>
+              <p class="ai-demo-note lang-text ta">மாதிரி தரவு</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LIVE TV ── -->
+    <section class="live-section" id="live-tv" aria-labelledby="liveHeading">
+      <div class="container">
+        <header class="section-header centered">
+          <h2 class="section-title" id="liveHeading">
+            <span class="live-dot large" aria-hidden="true"></span>
+            <span class="lang-text en">TV Preview</span>
+            <span class="lang-text ta">தொலைக்காட்சி முன்னோட்டம்</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="lang-text en">Live broadcast integration coming soon. Currently displaying a demonstration placeholder.</span>
+            <span class="lang-text ta">நேரடி ஒளிபரப்பு ஒருங்கிணைப்பு விரைவில் வருகிறது. தற்போது ஒரு ஆர்ப்பாட்ட இடம்பிடிப்பு காட்டப்படுகிறது.</span>
+          </p>
+        </header>
+
+        <div class="live-layout">
+          <!-- Main player -->
+          <div class="live-player-wrap">
+            <div class="live-player" role="img" aria-label="[DEMO] Broadcast player preview; no stream is connected">
+              <div class="live-player-inner">
+                <div class="live-indicator">
+                  <span class="live-dot" aria-hidden="true"></span>
+                  <span class="lang-text en">DEMO — No Live Feed Active</span>
+                  <span class="lang-text ta">மாதிரி — நேரடி ஒளிபரப்பு இல்லை</span>
+                </div>
+                <div class="live-placeholder-content">
+                  <div class="live-icon" aria-hidden="true">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
+                      <polyline points="17 2 12 7 7 2"/>
+                    </svg>
+                  </div>
+                  <p class="lang-text en">NewsSphere Live Broadcast</p>
+                  <p class="lang-text ta">NewsSphere நேரடி ஒளிபரப்பு</p>
+                  <p class="live-sub lang-text en">Live streaming integration will be enabled when real broadcast sources are connected.</p>
+                  <p class="live-sub lang-text ta">உண்மையான ஒளிபரப்பு மூலங்கள் இணைக்கப்படும் போது நேரடி ஒளிபரப்பு செயல்படுத்தப்படும்.</p>
+                </div>
+                <div class="live-controls" aria-label="Player controls (non-functional demo)">
+                  <button class="player-btn" aria-label="Play (demo)" disabled>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </button>
+                  <div class="player-progress" aria-hidden="true"><div class="player-progress-bar"></div></div>
+                  <button class="player-btn" aria-label="Volume (demo)" disabled>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  </button>
+                  <button class="player-btn" aria-label="Fullscreen (demo)" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Channel list -->
+          <div class="live-channels" aria-label="Demo channel list">
+            <h3>
+              <span class="lang-text en">Channels</span>
+              <span class="lang-text ta">சேனல்கள்</span>
+            </h3>
+            <ul class="channel-list" role="list">
+              <li class="channel-item active" role="listitem" tabindex="0">
+                <span class="channel-dot" aria-hidden="true"></span>
+                <span class="channel-name">NewsSphere World</span>
+                <span class="channel-status lang-text en">Demo</span>
+                <span class="channel-status lang-text ta">மாதிரி</span>
+              </li>
+              <li class="channel-item" role="listitem" tabindex="0">
+                <span class="channel-dot"></span>
+                <span class="channel-name">NewsSphere Tamil</span>
+                <span class="channel-status lang-text en">Demo</span>
+                <span class="channel-status lang-text ta">மாதிரி</span>
+              </li>
+              <li class="channel-item" role="listitem" tabindex="0">
+                <span class="channel-dot"></span>
+                <span class="channel-name">NewsSphere Business</span>
+                <span class="channel-status lang-text en">Demo</span>
+                <span class="channel-status lang-text ta">மாதிரி</span>
+              </li>
+              <li class="channel-item" role="listitem" tabindex="0">
+                <span class="channel-dot"></span>
+                <span class="channel-name">NewsSphere Sports</span>
+                <span class="channel-status lang-text en">Demo</span>
+                <span class="channel-status lang-text ta">மாதிரி</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SPORTS ── -->
+    <section class="news-section alt-bg" id="sports-section" aria-labelledby="sportsHeading">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title" id="sportsHeading">
+            <span class="lang-text en">Sports</span>
+            <span class="lang-text ta">விளையாட்டு</span>
+          </h2>
+          <a href="#" class="view-all-link">
+            <span class="lang-text en">View All →</span>
+            <span class="lang-text ta">அனைத்தும் காண →</span>
+          </a>
+        </header>
+
+        <div class="sports-layout">
+          <!-- Sports scoreboard -->
+          <div class="scoreboard" aria-label="Demo sports scoreboard">
+            <div class="scoreboard-header">
+              <h3>
+                <span class="lang-text en">Match Scores · Demo</span>
+                <span class="lang-text ta">நேரடி மதிப்பெண்கள் [மாதிரி]</span>
+              </h3>
+            </div>
+            <div class="score-items">
+              <div class="score-item">
+                <span class="score-sport-tag">Cricket</span>
+                <div class="match-info">
+                  <span class="team">India</span>
+                  <span class="score-val">287/6 (48)</span>
+                  <span class="vs">vs</span>
+                  <span class="score-val">—</span>
+                  <span class="team">Australia</span>
+                </div>
+                <span class="match-status demo-tag">Demo · 3rd ODI</span>
+              </div>
+              <div class="score-item">
+                <span class="score-sport-tag">Football</span>
+                <div class="match-info">
+                  <span class="team">Barcelona</span>
+                  <span class="score-val">2</span>
+                  <span class="vs">–</span>
+                  <span class="score-val">1</span>
+                  <span class="team">Real Madrid</span>
+                </div>
+                <span class="match-status demo-tag">Demo · 72'</span>
+              </div>
+              <div class="score-item">
+                <span class="score-sport-tag">Tennis</span>
+                <div class="match-info">
+                  <span class="team">Player A</span>
+                  <span class="score-val">6-3, 4-5</span>
+                  <span class="vs">vs</span>
+                  <span class="score-val">—</span>
+                  <span class="team">Player B</span>
+                </div>
+                <span class="match-status demo-tag">Demo · Set 2</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sports news cards -->
+          <div class="sports-news" id="sportsNewsGrid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WEATHER ── -->
+    <section class="weather-section" id="weather-section" aria-labelledby="weatherHeading">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title" id="weatherHeading">
+            <span class="lang-text en">Weather</span>
+            <span class="lang-text ta">வானிலை</span>
+          </h2>
+          <p class="demo-label-inline">
+            <span class="lang-text en">Demo data only — not real forecasts</span>
+            <span class="lang-text ta">மாதிரி தரவு மட்டுமே — உண்மையான முன்னறிவிப்பு அல்ல</span>
+          </p>
+        </header>
+
+        <div class="weather-grid">
+          <div class="weather-main" aria-label="Current conditions demo">
+            <div class="weather-icon-large" aria-hidden="true">☀️</div>
+            <div class="weather-current">
+              <div class="weather-city">
+                <span class="lang-text en">Chennai, India [DEMO]</span>
+                <span class="lang-text ta">சென்னை, இந்தியா [மாதிரி]</span>
+              </div>
+              <div class="weather-temp">32°C</div>
+              <div class="weather-desc">
+                <span class="lang-text en">Sunny, humid</span>
+                <span class="lang-text ta">வெயில், ஈரப்பதம்</span>
+              </div>
+              <div class="weather-details-row">
+                <span>💧 72%</span>
+                <span>💨 18 km/h</span>
+                <span>👁️ 10 km</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="weather-forecast" aria-label="5-day forecast demo">
+            <h3>
+              <span class="lang-text en">5-Day Forecast [Demo]</span>
+              <span class="lang-text ta">5-நாள் முன்னறிவிப்பு [மாதிரி]</span>
+            </h3>
+            <div class="forecast-days">
+              <div class="forecast-day">
+                <span class="day-name lang-text en">Mon</span>
+                <span class="day-name lang-text ta">திங்கள்</span>
+                <span class="day-icon" aria-hidden="true">🌤️</span>
+                <span class="day-temp">33°/26°</span>
+              </div>
+              <div class="forecast-day">
+                <span class="day-name lang-text en">Tue</span>
+                <span class="day-name lang-text ta">செவ்வாய்</span>
+                <span class="day-icon" aria-hidden="true">🌧️</span>
+                <span class="day-temp">29°/24°</span>
+              </div>
+              <div class="forecast-day">
+                <span class="day-name lang-text en">Wed</span>
+                <span class="day-name lang-text ta">புதன்</span>
+                <span class="day-icon" aria-hidden="true">⛅</span>
+                <span class="day-temp">31°/25°</span>
+              </div>
+              <div class="forecast-day">
+                <span class="day-name lang-text en">Thu</span>
+                <span class="day-name lang-text ta">வியாழன்</span>
+                <span class="day-icon" aria-hidden="true">☀️</span>
+                <span class="day-temp">34°/27°</span>
+              </div>
+              <div class="forecast-day">
+                <span class="day-name lang-text en">Fri</span>
+                <span class="day-name lang-text ta">வெள்ளி</span>
+                <span class="day-icon" aria-hidden="true">🌦️</span>
+                <span class="day-temp">30°/24°</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="weather-cities" aria-label="Global cities demo weather">
+            <h3>
+              <span class="lang-text en">Global Cities [Demo]</span>
+              <span class="lang-text ta">உலக நகரங்கள் [மாதிரி]</span>
+            </h3>
+            <ul class="city-list">
+              <li><span class="city-name">London</span><span class="city-icon" aria-hidden="true">🌧️</span><span class="city-temp">14°C</span></li>
+              <li><span class="city-name">New York</span><span class="city-icon" aria-hidden="true">🌤️</span><span class="city-temp">21°C</span></li>
+              <li><span class="city-name">Tokyo</span><span class="city-icon" aria-hidden="true">☀️</span><span class="city-temp">19°C</span></li>
+              <li><span class="city-name">Sydney</span><span class="city-icon" aria-hidden="true">🌤️</span><span class="city-temp">23°C</span></li>
+              <li><span class="city-name">Dubai</span><span class="city-icon" aria-hidden="true">☀️</span><span class="city-temp">38°C</span></li>
+              <li><span class="city-name">Paris</span><span class="city-icon" aria-hidden="true">⛅</span><span class="city-temp">16°C</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HOROSCOPE ── -->
+    <section class="horoscope-section alt-bg" id="horoscope-section" aria-labelledby="horoscopeHeading">
+      <div class="container">
+        <header class="section-header centered">
+          <h2 class="section-title" id="horoscopeHeading">
+            <span class="lang-text en">Daily Horoscope [Demo]</span>
+            <span class="lang-text ta">தினசரி ராசிபலன் [மாதிரி]</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="lang-text en">For entertainment purposes only. Not verified astrological advice.</span>
+            <span class="lang-text ta">பொழுதுபோக்கு நோக்கங்களுக்கு மட்டுமே. சரிபார்க்கப்பட்ட சோதிடமல்ல.</span>
+          </p>
+          <div class="horoscope-date">
+            <span class="lang-text en">12 October 2026</span>
+            <span class="lang-text ta">12 அக்டோபர் 2026</span>
+          </div>
+        </header>
+
+        <div class="rasi-grid" id="rasiGrid" aria-label="12 Rasi horoscope cards">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="#" class="brand footer-brand-link" aria-label="NewsSphere home">
+          <span class="brand-logo" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2"/>
+              <ellipse cx="18" cy="18" rx="8" ry="17" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="1" y1="18" x2="35" y2="18" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </span>
+          <span class="brand-name">NewsSphere</span>
+        </a>
+        <p class="footer-desc">
+          <span class="lang-text en">AI-Powered Live News Intelligence Platform. Worldwide coverage, English and Tamil. [Demo Product — Not live news]</span>
+          <span class="lang-text ta">AI-இயக்கப்படும் நேரடி செய்தி நுண்ணறிவு தளம். உலகளாவிய கவரேஜ். [மாதிரி தயாரிப்பு]</span>
+        </p>
+        <div class="footer-social" aria-label="Social media links (demo)">
+          <a href="#" class="social-link" aria-label="Twitter/X (demo)">𝕏</a>
+          <a href="#" class="social-link" aria-label="Facebook (demo)">f</a>
+          <a href="#" class="social-link" aria-label="YouTube (demo)">▶</a>
+          <a href="#" class="social-link" aria-label="Instagram (demo)">◎</a>
+        </div>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <div class="footer-nav-col">
+          <h3 class="footer-nav-heading">
+            <span class="lang-text en">News</span>
+            <span class="lang-text ta">செய்திகள்</span>
+          </h3>
+          <ul>
+            <li><a href="#world-news" class="lang-text en">World</a><a href="#world-news" class="lang-text ta">உலகம்</a></li>
+            <li><a href="#politics-news" class="lang-text en">Politics</a><a href="#politics-news" class="lang-text ta">அரசியல்</a></li>
+            <li><a href="#tech-news" class="lang-text en">Technology</a><a href="#tech-news" class="lang-text ta">தொழில்நுட்பம்</a></li>
+            <li><a href="#business-news" class="lang-text en">Business</a><a href="#business-news" class="lang-text ta">வணிகம்</a></li>
+            <li><a href="#science-news" class="lang-text en">Science</a><a href="#science-news" class="lang-text ta">அறிவியல்</a></li>
+            <li><a href="#sports-section" class="lang-text en">Sports</a><a href="#sports-section" class="lang-text ta">விளையாட்டு</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <h3 class="footer-nav-heading">
+            <span class="lang-text en">Features</span>
+            <span class="lang-text ta">அம்சங்கள்</span>
+          </h3>
+          <ul>
+            <li><a href="#live-tv" class="lang-text en">Live TV</a><a href="#live-tv" class="lang-text ta">நேரடி ஒளிபரப்பு</a></li>
+            <li><a href="#ai-section" class="lang-text en">AI Intelligence</a><a href="#ai-section" class="lang-text ta">AI நுண்ணறிவு</a></li>
+            <li><a href="#weather-section" class="lang-text en">Weather</a><a href="#weather-section" class="lang-text ta">வானிலை</a></li>
+            <li><a href="#horoscope-section" class="lang-text en">Horoscope</a><a href="#horoscope-section" class="lang-text ta">ராசிபலன்</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <h3 class="footer-nav-heading">
+            <span class="lang-text en">Information</span>
+            <span class="lang-text ta">தகவல்</span>
+          </h3>
+          <ul>
+            <li><a href="#" class="lang-text en">About Us</a><a href="#" class="lang-text ta">எங்களைப் பற்றி</a></li>
+            <li><a href="#" class="lang-text en">Editorial Policy</a><a href="#" class="lang-text ta">தலையங்க கொள்கை</a></li>
+            <li><a href="#" class="lang-text en">Privacy Policy</a><a href="#" class="lang-text ta">தனியுரிமை கொள்கை</a></li>
+            <li><a href="#" class="lang-text en">Terms of Use</a><a href="#" class="lang-text ta">பயன்பாட்டு விதிகள்</a></li>
+            <li><a href="#" class="lang-text en">Contact</a><a href="#" class="lang-text ta">தொடர்பு</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <h3 class="footer-nav-heading">
+            <span class="lang-text en">Newsletter [Demo]</span>
+            <span class="lang-text ta">செய்திமடல் [மாதிரி]</span>
+          </h3>
+          <p class="footer-nl-desc">
+            <span class="lang-text en">Sign up for daily AI-curated news briefings.</span>
+            <span class="lang-text ta">தினசரி AI-தேர்ந்தெடுத்த செய்தி சுருக்கங்களுக்கு பதிவு செய்யுங்கள்.</span>
+          </p>
+          <form class="footer-nl-form" onsubmit="handleNewsletterSubmit(event)">
+            <input
+              type="email"
+              class="footer-nl-input"
+              placeholder="your@email.com"
+              aria-label="Email address for newsletter"
+              required
+            />
+            <button type="submit" class="footer-nl-btn">
+              <span class="lang-text en">Subscribe</span>
+              <span class="lang-text ta">பதிவு செய்</span>
+            </button>
+          </form>
+          <p class="footer-nl-note" id="nlFeedback" aria-live="polite"></p>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p class="footer-copy">
+          <span class="lang-text en">© 2026 NewsSphere. All content is demonstration only. Not a real news service.</span>
+          <span class="lang-text ta">© 2026 NewsSphere. அனைத்து உள்ளடக்கமும் ஆர்ப்பாட்டம் மட்டுமே. உண்மையான செய்தி சேவை அல்ல.</span>
+        </p>
+        <p class="footer-legal">
+          <span class="lang-text en">This platform is in active development. Demo content does not represent real events.</span>
+          <span class="lang-text ta">இந்த தளம் தீவிர வளர்ச்சியில் உள்ளது. மாதிரி உள்ளடக்கம் உண்மையான நிகழ்வுகளை குறிக்கவில்லை.</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ░░ ARTICLE MODAL ░░ -->
+  <div class="modal-overlay" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-container">
+      <button class="modal-close icon-btn" id="modalClose" aria-label="Close article">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <div class="modal-content" id="modalContent">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ░░ BACK TO TOP ░░ -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" hidden>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
